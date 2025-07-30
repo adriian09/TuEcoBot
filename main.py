@@ -9,6 +9,9 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
 
+if not TOKEN:
+    raise ValueError("Falta la variable de entorno BOT_TOKEN. Verifica tu archivo .env.")
+
 # Configura logging (opcional pero recomendado)
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -399,7 +402,7 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("mensaje", mensaje))
 
-    print("Bot encendido...")
+    logging.info("TuEcoBot está listo y escuchando comandos...")
     app.run_polling()
 
 if __name__ == "__main__":
